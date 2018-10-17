@@ -1,3 +1,6 @@
-h1 h2 h3 a p {
-  font-family: source-sans-pro;
+h1 h2 h3 a p ul li {
+  font-family: Courier;
+}
+ul {
+  list-style: none;
 }
