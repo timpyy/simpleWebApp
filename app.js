@@ -72,10 +72,10 @@ app.get('/filter', (req, res) => {
       }
     }
   }
-  if(matchCount == 0) {
+  if(matchCount === 0) {
     tag = "";
   }
-  if(tag == "") {
+  if(tag === "") {
     res.render('myTemplate', { 'title': 'ascii sketchbook', 'textart': artArr});
   }
   else {

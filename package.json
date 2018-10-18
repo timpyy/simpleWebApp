@@ -27,6 +27,8 @@
     "sinon": "^6.3.4"
   },
   "dependencies": {
+    "express": "^4.16.4",
+    "hbs": "^4.0.1",
     "request": "^2.88.0"
   }
 }
