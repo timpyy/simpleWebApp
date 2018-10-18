@@ -2,7 +2,7 @@
 <form method='GET' action='/filter'>
   Filter by a tag:
   <input type='text' name='tag'>
-  <input type='submit'>
+
   </form>
   {{#each textart}}
   <ul>
@@ -10,7 +10,7 @@
     <li><pre>{{artwork}}</pre></li>
     <li> Tags:
       {{#each tags}}
-       {{this}}
+      <a href="/filter?tag={{this}}">{{this}}</a>
       {{/each}}
     </li>
   </ul>

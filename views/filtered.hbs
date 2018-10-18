@@ -1,14 +1,13 @@
 <form method='GET' action='/filter'>
   Filter by a tag:
   <input type='text' name='tag'>
-  <input type='submit'>
   </form>
 <ul>
 <li><b>{{textart.date}} {{textart.title}}</b></li>
   <li><pre>{{textart.artwork}}</pre></li>
   <li> Tags:
     {{#each textart.tags}}
-     {{this}}
+     <a href="/filter?tag={{this}}">{{this}}</a>
     {{/each}}
   </li>
 </ul>

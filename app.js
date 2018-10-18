@@ -3,6 +3,9 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 
 const staticPath = path.resolve(__dirname, 'public');
 const art1 = {
@@ -59,13 +62,18 @@ app.set('view engine', 'hbs');
 app.get('/', (req, res) => res.render('myTemplate', { 'title': 'ascii sketchbook', 'textart': artArr}));
 app.get('/filter', (req, res) => {
   let artNumber = 0;
-  const tag = req.query.tag;
+  let matchCount = 0;
+  let tag = req.query.tag;
   for(let i = 0; i < artArr.length; i++) {
     for(let j = 0; j < artArr[i].tags.length; j++) {
       if(artArr[i].tags[j].includes(tag)) {
         artNumber = i;
+        matchCount++;
       }
     }
+  }
+  if(matchCount == 0) {
+    tag = "";
   }
   if(tag == "") {
     res.render('myTemplate', { 'title': 'ascii sketchbook', 'textart': artArr});
@@ -75,6 +83,24 @@ app.get('/filter', (req, res) => {
   }
 }
 );
+
+app.get('/add', (req, res) => {
+  res.render('add');
+});
+
+
+app.post('/add', (req, res) => {
+  let tagArr = req.body.tags.split(" ");
+  let newArt = {
+    'title' : req.body.title,
+    'date' : req.body.dt,
+    'tags' : tagArr,
+    'artwork' : req.body.artwork
+  };
+  artArr.push(newArt);
+  res.render('myTemplate', { 'title': 'ascii sketchbook', 'textart': artArr.reverse()});
+});
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 const logger = (req, res, next) => {
